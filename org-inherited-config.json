@@ -1,0 +1,90 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Conforma organization inherited MintMaker (Renovate) configuration",
+  "extends": [
+    "config:recommended",
+    ":gitSignOff",
+    ":disableDependencyDashboard"
+  ],
+  "ignorePresets": [
+    ":dependencyDashboard"
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "timezone": "America/New_York",
+  "packageRules": [
+    {
+      "description": "Group major Go version updates with clear labeling",
+      "matchManagers": ["gomod"],
+      "matchDepNames": ["go", "toolchain"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "major_go_version_update",
+      "commitMessagePrefix": "🚨 Major: ",
+      "commitMessageAction": "Update Go"
+    },
+    {
+      "description": "Group major Go Docker image updates with clear labeling",
+      "matchManagers": ["dockerfile"],
+      "matchPackageNames": ["golang", "go", "docker.io/library/golang"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "major_go_version_update",
+      "commitMessagePrefix": "🚨 Major: ",
+      "commitMessageAction": "Update Go"
+    },
+    {
+      "description": "Disable minor version updates for v0 majors (unstable API)",
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["minor"],
+      "enabled": false
+    },
+    {
+      "description": "Enable minor and patch Go version updates with grouping",
+      "matchManagers": ["gomod"],
+      "matchDepNames": ["go", "toolchain"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "go_version_update",
+      "commitMessageAction": "Update Go"
+    },
+    {
+      "description": "Enable minor and patch Go Docker updates with grouping",
+      "matchManagers": ["dockerfile"],
+      "matchDepNames": ["docker.io/library/golang", "golang", "go"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "go_version_update",
+      "commitMessageAction": "Update Go"
+    },
+    {
+      "description": "Group Go module updates (excluding Go version itself)",
+      "matchManagers": ["gomod"],
+      "excludePackageNames": ["go", "toolchain"],
+      "groupName": "go_module_updates",
+      "commitMessageAction": "Update Go dependencies"
+    },
+    {
+      "description": "Enable Tekton automerge for safe updates",
+      "matchManagers": ["tekton"],
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Group other Docker updates",
+      "matchManagers": ["dockerfile"],
+      "excludePackageNames": ["docker.io/library/golang", "golang", "go"],
+      "versioning": "semver",
+      "groupName": "docker_updates",
+      "commitMessageAction": "Update Docker images"
+    },
+    {
+      "description": "Automerge GitHub Actions updates",
+      "matchFiles": [
+        ".github/workflows/*.yml",
+        ".github/workflows/*.yaml"
+      ],
+      "automerge": true,
+      "groupName": "github_actions_updates",
+      "commitMessageAction": "Update GitHub Actions"
+    }
+  ],
+  "postUpdateOptions": ["gomodTidy"]
+}
