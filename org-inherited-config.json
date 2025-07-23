@@ -13,6 +13,7 @@
     "enabled": true
   },
   "timezone": "America/New_York",
+  "schedule": ["0 * * * *"],
   "packageRules": [
     {
       "description": "Group major Go version updates with clear labeling",
