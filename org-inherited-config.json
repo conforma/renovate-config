@@ -13,79 +13,272 @@
     "enabled": true
   },
   "timezone": "America/New_York",
-  "schedule": ["0 * * * *"],
   "packageRules": [
     {
       "description": "Group major Go version updates with clear labeling",
-      "matchManagers": ["gomod"],
-      "matchDepNames": ["go", "toolchain"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "major_go_version_update",
-      "commitMessagePrefix": "🚨 Major: ",
-      "commitMessageAction": "Update Go"
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchDepNames": [
+        "go",
+        "toolchain"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "groupName": "go_major_version",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": "(major)"
+      },
+      "commitMessageAction": "🚨 Update Go version",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": "(major)"
     },
     {
       "description": "Group major Go Docker image updates with clear labeling",
-      "matchManagers": ["dockerfile"],
-      "matchPackageNames": ["golang", "go", "docker.io/library/golang"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "major_go_version_update",
-      "commitMessagePrefix": "🚨 Major: ",
-      "commitMessageAction": "Update Go"
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "docker.io/library/golang",
+        "registry.access.redhat.com/ubi9/go-toolset"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "groupName": "go_major_version",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": "(major)"
+      },
+      "commitMessageAction": "🚨 Update Go version",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": "(major)"
     },
     {
-      "description": "Disable minor version updates for v0 majors (unstable API)",
-      "matchCurrentVersion": "/^0\\./",
-      "matchUpdateTypes": ["minor"],
-      "enabled": false
+      "description": "Group patch Go version updates",
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchDepNames": [
+        "go",
+        "toolchain"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "groupName": "go_version",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": ""
+      },
+      "commitMessageAction": "Update Go version",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": ""
     },
     {
-      "description": "Enable minor and patch Go version updates with grouping",
-      "matchManagers": ["gomod"],
-      "matchDepNames": ["go", "toolchain"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "go_version_update",
-      "commitMessageAction": "Update Go"
-    },
-    {
-      "description": "Enable minor and patch Go Docker updates with grouping",
-      "matchManagers": ["dockerfile"],
-      "matchDepNames": ["docker.io/library/golang", "golang", "go"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "go_version_update",
-      "commitMessageAction": "Update Go"
+      "description": "Group patch Go Docker updates",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchDepNames": [
+        "docker.io/library/golang",
+        "registry.access.redhat.com/ubi9/go-toolset"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "groupName": "go_version",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": ""
+      },
+      "commitMessageAction": "Update Go version",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": ""
     },
     {
       "description": "Group Go module updates (excluding Go version itself)",
-      "matchManagers": ["gomod"],
-      "excludePackageNames": ["go", "toolchain"],
-      "groupName": "go_module_updates",
-      "commitMessageAction": "Update Go dependencies"
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchPackageNames": [
+        "!go",
+        "!toolchain"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "go_modules",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": ""
+      },
+      "commitMessageAction": "Update Go modules",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": ""
+    },
+    {
+      "description": "Group Go major module updates (excluding Go version itself)",
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchPackageNames": [
+        "!go",
+        "!toolchain"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "go_major_modules",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": ""
+      },
+      "commitMessageAction": "🚨 Update Go modules",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": "(major)"
     },
     {
       "description": "Enable Tekton automerge for safe updates",
-      "matchManagers": ["tekton"],
-      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "matchManagers": [
+        "tekton"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true
     },
     {
-      "description": "Group other Docker updates",
-      "matchManagers": ["dockerfile"],
-      "excludePackageNames": ["docker.io/library/golang", "golang", "go"],
-      "versioning": "semver",
-      "groupName": "docker_updates",
-      "commitMessageAction": "Update Docker images"
+      "description": "Group Docker updates",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "!docker.io/library/golang",
+        "!registry.access.redhat.com/ubi9/go-toolset"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "docker_images",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": ""
+      },
+      "commitMessageAction": "Update Docker images",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": ""
+    },
+    {
+      "description": "Group major Docker updates",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "!docker.io/library/golang",
+        "!registry.access.redhat.com/ubi9/go-toolset"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "docker_major_images",
+      "group": {
+        "commitMessagePrefix": "",
+        "commitMessageTopic": "",
+        "commitMessageExtra": "",
+        "commitMessageSuffix": ""
+      },
+      "commitMessageAction": "🚨 Update Docker images",
+      "commitMessagePrefix": "",
+      "commitMessageTopic": "",
+      "commitMessageExtra": "",
+      "commitMessageSuffix": "(major)"
     },
     {
       "description": "Automerge GitHub Actions updates",
-      "matchFiles": [
+      "matchFileNames": [
         ".github/workflows/*.yml",
         ".github/workflows/*.yaml"
       ],
       "automerge": true,
-      "groupName": "github_actions_updates",
-      "commitMessageAction": "Update GitHub Actions"
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Enable Go version updates by using bump range strategy",
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchDepNames": [
+        "go",
+        "toolchain"
+      ],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Constrain Red Hat UBI go-toolset to Go versions only (not OS versions)",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "registry.access.redhat.com/ubi9/go-toolset"
+      ],
+      "allowedVersions": "/^1\\./",
+      "versioning": "semver"
+    },
+    {
+      "description": "Disable minor version updates for v0 majors (unstable API)",
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "enabled": false
     }
   ],
-  "postUpdateOptions": ["gomodTidy"]
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "gomod": {
+    "schedule": [
+      "before 5am"
+    ]
+  },
+  "dockerfile": {
+    "schedule": [
+      "before 5am"
+    ]
+  }
 }
