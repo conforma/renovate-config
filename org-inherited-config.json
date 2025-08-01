@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Conforma organization inherited MintMaker (Renovate) configuration",
+  "description": [
+    "Conforma organization inherited MintMaker (Renovate) configuration"
+  ],
   "ignorePresets": [
     ":dependencyDashboard"
   ],
@@ -10,7 +12,9 @@
   "timezone": "America/New_York",
   "packageRules": [
     {
-      "description": "Group major Go version updates with clear labeling",
+      "description": [
+        "Group major Go version updates with clear labeling"
+      ],
       "matchManagers": [
         "gomod"
       ],
@@ -35,7 +39,9 @@
       "commitMessageSuffix": "(major)"
     },
     {
-      "description": "Group major Go Docker image updates with clear labeling",
+      "description": [
+        "Group major Go Docker image updates with clear labeling"
+      ],
       "matchManagers": [
         "dockerfile"
       ],
@@ -60,7 +66,9 @@
       "commitMessageSuffix": "(major)"
     },
     {
-      "description": "Group patch Go version updates",
+      "description": [
+        "Group patch Go version updates"
+      ],
       "matchManagers": [
         "gomod"
       ],
@@ -85,7 +93,9 @@
       "commitMessageSuffix": ""
     },
     {
-      "description": "Group patch Go Docker updates",
+      "description": [
+        "Group patch Go Docker updates"
+      ],
       "matchManagers": [
         "dockerfile"
       ],
@@ -110,7 +120,9 @@
       "commitMessageSuffix": ""
     },
     {
-      "description": "Group Go module updates (excluding Go version itself)",
+      "description": [
+        "Group Go module updates (excluding Go version itself)"
+      ],
       "matchManagers": [
         "gomod"
       ],
@@ -136,7 +148,9 @@
       "commitMessageSuffix": ""
     },
     {
-      "description": "Group Go major module updates (excluding Go version itself)",
+      "description": [
+        "Group Go major module updates (excluding Go version itself)"
+      ],
       "matchManagers": [
         "gomod"
       ],
@@ -161,7 +175,9 @@
       "commitMessageSuffix": "(major)"
     },
     {
-      "description": "Enable Tekton automerge for safe updates",
+      "description": [
+        "Enable Tekton automerge for safe updates"
+      ],
       "matchManagers": [
         "tekton"
       ],
@@ -173,7 +189,9 @@
       "automerge": true
     },
     {
-      "description": "Group Docker updates",
+      "description": [
+        "Group Docker updates"
+      ],
       "matchManagers": [
         "dockerfile"
       ],
@@ -199,7 +217,9 @@
       "commitMessageSuffix": ""
     },
     {
-      "description": "Group major Docker updates",
+      "description": [
+        "Group major Docker updates"
+      ],
       "matchManagers": [
         "dockerfile"
       ],
@@ -224,7 +244,9 @@
       "commitMessageSuffix": "(major)"
     },
     {
-      "description": "Automerge GitHub Actions updates",
+      "description": [
+        "Automerge GitHub Actions updates"
+      ],
       "matchFileNames": [
         ".github/workflows/*.yml",
         ".github/workflows/*.yaml"
@@ -233,7 +255,9 @@
       "groupName": "GitHub Actions"
     },
     {
-      "description": "Enable Go version updates by using bump range strategy",
+      "description": [
+        "Enable Go version updates by using bump range strategy"
+      ],
       "matchManagers": [
         "gomod"
       ],
@@ -244,7 +268,9 @@
       "rangeStrategy": "bump"
     },
     {
-      "description": "Constrain Red Hat UBI go-toolset to Go versions only (not OS versions)",
+      "description": [
+        "Constrain Red Hat UBI go-toolset to Go versions only (not OS versions)"
+      ],
       "matchManagers": [
         "dockerfile"
       ],
@@ -255,7 +281,9 @@
       "versioning": "semver"
     },
     {
-      "description": "Disable minor version updates for v0 majors (unstable API)",
+      "description": [
+        "Disable minor version updates for v0 majors (unstable API)"
+      ],
       "matchCurrentVersion": "/^0\\./",
       "matchUpdateTypes": [
         "minor"
@@ -268,12 +296,12 @@
   ],
   "gomod": {
     "schedule": [
-      "before 5am"
+      "before 6am"
     ]
   },
   "dockerfile": {
     "schedule": [
-      "before 5am"
+      "before 6am"
     ]
   }
 }
