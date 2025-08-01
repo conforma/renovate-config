@@ -1,11 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Conforma organization inherited MintMaker (Renovate) configuration",
-  "extends": [
-    "config:recommended",
-    ":gitSignOff",
-    ":disableDependencyDashboard"
-  ],
   "ignorePresets": [
     ":dependencyDashboard"
   ],
