@@ -6,6 +6,7 @@
   "ignorePresets": [
     ":dependencyDashboard"
   ],
+  "semanticCommits": "disabled",
   "vulnerabilityAlerts": {
     "enabled": true
   },
@@ -16,10 +17,12 @@
         "Group major Go version updates with clear labeling"
       ],
       "matchManagers": [
-        "gomod"
+        "gomod",
+        "asdf"
       ],
       "matchDepNames": [
         "go",
+        "golang",
         "toolchain"
       ],
       "matchUpdateTypes": [
@@ -52,6 +55,8 @@
       "matchUpdateTypes": [
         "minor"
       ],
+      "allowedVersions": "/^1\\./",
+      "versioning": "semver",
       "groupName": "go_major_version",
       "group": {
         "commitMessagePrefix": "",
@@ -70,10 +75,12 @@
         "Group patch Go version updates"
       ],
       "matchManagers": [
-        "gomod"
+        "gomod",
+        "asdf"
       ],
       "matchDepNames": [
         "go",
+        "golang",
         "toolchain"
       ],
       "matchUpdateTypes": [
@@ -99,13 +106,15 @@
       "matchManagers": [
         "dockerfile"
       ],
-      "matchDepNames": [
+      "matchPackageNames": [
         "docker.io/library/golang",
         "registry.access.redhat.com/ubi9/go-toolset"
       ],
       "matchUpdateTypes": [
         "patch"
       ],
+      "allowedVersions": "/^1\\./",
+      "versioning": "semver",
       "groupName": "go_version",
       "group": {
         "commitMessagePrefix": "",
@@ -266,19 +275,6 @@
         "toolchain"
       ],
       "rangeStrategy": "bump"
-    },
-    {
-      "description": [
-        "Constrain Red Hat UBI go-toolset to Go versions only (not OS versions)"
-      ],
-      "matchManagers": [
-        "dockerfile"
-      ],
-      "matchPackageNames": [
-        "registry.access.redhat.com/ubi9/go-toolset"
-      ],
-      "allowedVersions": "/^1\\./",
-      "versioning": "semver"
     },
     {
       "description": [
